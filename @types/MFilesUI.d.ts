@@ -439,6 +439,8 @@ declare module MFilesUI {
 		interface UndoObjectCheckout extends Event { } // 67
 		interface UndoObjectCheckouts extends Event { } // 69
 		interface VaultLanguageChanged extends Event { } // 101
+		interface ViewLocationChanged extends Event { } // 174
+		interface ViewLocationChangedAsync extends Event { } // 175
 	}
 
 	/** Event Callback types */
@@ -1067,6 +1069,7 @@ declare module MFilesUI {
 			AddObjectFile: Event.AddObjectFile & number;
 			AddObjectsToFavorites: Event.AddObjectsToFavorites & number;
 			AddObjectToFavorites: Event.AddObjectToFavorites & number;
+			AutoInstallScheduleChanged: Event.AutoInstallScheduleChanged & number;
 			BuiltinCommand: Event.BuiltinCommand & number;
 			ChangeVaultLanguage: Event.ChangeVaultLanguage & number;
 			CheckInObject: Event.CheckInObject & number;
@@ -1093,6 +1096,7 @@ declare module MFilesUI {
 			ItemsDropped: Event.ItemsDropped & number;
 			ListingActivated: Event.ListingActivated & number;
 			ListingDeactivated: Event.ListingDeactivated & number;
+			ListingUpdated: Event.ListingUpdated & number;
 			LoggedIn: Event.LoggedIn & number;
 			LogOut: Event.LogOut & number;
 			MinimizedStateChanged: Event.MinimizedStateChanged & number;
@@ -1140,6 +1144,8 @@ declare module MFilesUI {
 			ObjectVersionPermissionsSet: Event.ObjectVersionPermissionsSet & number;
 			ObjectVersionRolledBack: Event.ObjectVersionRolledBack & number;
 			ObjectVersionsDestroyed: Event.ObjectVersionsDestroyed & number;
+			OfflineSyncStarted: Event.OfflineSyncStarted & number;
+			OfflineSyncStopped: Event.OfflineSyncStopped & number;
 			PaneResized: Event.PaneResized & number;
 			PropertiesOfObjectVersionSet: Event.PropertiesOfObjectVersionSet & number;
 			PropertiesOfObjectVersionsSet: Event.PropertiesOfObjectVersionsSet & number;
@@ -1176,6 +1182,8 @@ declare module MFilesUI {
 			UndoObjectCheckout: Event.UndoObjectCheckout & number;
 			UndoObjectCheckouts: Event.UndoObjectCheckouts & number;
 			VaultLanguageChanged: Event.VaultLanguageChanged & number;
+			ViewLocationChanged: Event.ViewLocationChanged & number;
+			ViewLocationChangedAsync: Event.ViewLocationChangedAsync & number;
 		};
 
 		MFExtApplicationPlatform: {
