@@ -1,6 +1,10 @@
-﻿/// <reference path="MFilesAPI.d.ts" />
+﻿/* eslint-disable @typescript-eslint/no-empty-interface */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
-declare module MFilesUI {
+/**
+ * Declare a globally available namespace.
+ */
+declare namespace MFilesUI {
 
 	/** Enumerations for command states. */
 	export interface CommandState { }
@@ -449,17 +453,17 @@ declare module MFilesUI {
 	 * Callback to be triggered when an item or child item changes.
 	 * @param { string } appGuid - The ID of the application sending the broadcast.
 	 * @param { string } msgID - The ID of the message being broadcast.
-	 * @param { * } data - The payload data of the broadcast.
+	 * @param { unknown } data - The payload data of the broadcast.
 	 */
-	type CrossApplicationBroadcastCallback = (appGuid: string, msgID: string, data: any) => any;
+	type CrossApplicationBroadcastCallback = (appGuid: string, msgID: string, data: unknown) => void;
 
 	/**
 	 * Callback to be triggered when an item or child item changes.
 	 * @param { string } appGuid - The ID of the application sending the notification.
 	 * @param { string } msgID - The ID of the message being sent.
-	 * @param { * } data - The payload data of the notification.
+	 * @param { unknown } data - The payload data of the notification.
 	 */
-	interface CrossApplicationNotificationCallback { (appGuid: string, msgID: string, data: any): any; }
+	interface CrossApplicationNotificationCallback { (appGuid: string, msgID: string, data: unknown): void; }
 
 	/**
 	 * An interface for registering to listen events from M-Files Client Application state changes.
@@ -532,9 +536,9 @@ declare module MFilesUI {
 		/**
 		 * Executes the specified command.
 		 * @param {number} command - The command ID. Can be a built-in command enum value or a custom command ID.
-		 * @param {*} arguments - Command argument or an arguments object, if the command requires arguments. Otherwise null.
+		 * @param {unknown} arguments - Command argument or an arguments object, if the command requires arguments. Otherwise null.
 		 */
-		ExecuteCommand(command: number, arguments: any): void
+		ExecuteCommand(command: number, arguments: unknown): void
 
 		/**
 		 * Gets the command state for builtin or custom command in specified location.
@@ -579,9 +583,9 @@ declare module MFilesUI {
 		/**
 		 * Creates a new MFiles API object.
 		 * @param {string} name - The type name of the object to create, e.g. "ObjVer".
-		 * @returns {any} - The new object.
+		 * @returns {unknown} - The new object.
 		 */
-		CreateInstance(name: string): any;
+		CreateInstance(name: string): unknown;
 
 		/**
 		 * Enables the exception to be propagated for caller process.
@@ -595,7 +599,7 @@ declare module MFilesUI {
 		 */
 		ReportException(exception: Error): void
 		ReportException(exception: string): void
-		ReportException(exception: any): void
+		ReportException(exception: unknown): void
 
 		/**
 		 * Throws an error with description.
@@ -623,7 +627,7 @@ declare module MFilesUI {
 		 * @param {boolean} privateData - True if the data is saved to script application private data set.
 		 * @param {string} data - True if the data is saved to script application private data set.
 		 */
-		MethodTemplate(name: string, privateData: boolean, data: string): void;
+		PersistStringData(name: string, privateData: boolean, data: string): void;
 
 		/**
 		 * Description
@@ -665,9 +669,9 @@ declare module MFilesUI {
 		 * Creates a managed object from a class in assembly.
 		 * @param {string} assemblyFile - //!< The assembly from where the class is looked up. E.g. "myassembly.dll". The assembly is relative to the current application folder.
 		 * @param {string} className - The object class to instantiate. E.g. "MyNamespace.MyClass".
-		 * @returns {any} - Receives the managed object.
+		 * @returns {object} - Receives the managed object.
 		 */
-		CreateObjectCLR(assemblyFile: string, className: string): any;
+		CreateObjectCLR(assemblyFile: string, className: string): object;
 
 		/**
 		 * Kill a timer that was previously created with SetTimer-method.
@@ -698,9 +702,9 @@ declare module MFilesUI {
 		 * @param {boolean} userSpecific - True to access registry keys under HKEY_CURRENT_USER, false to access under HKEY_LOCAL_MACHINE.
 		 * @param {string} key - The registry key where to write.
 		 * @param {string} valueName - The name of the value. Use empty string to write the default value of a registry key.
-		 * @returns {*} The registry value, or empty if the registry value was not found.
+		 * @returns {unknown} The registry value, or empty if the registry value was not found.
 		 */
-		ReadFromRegistry(userSpecific: boolean, key: string, valueName: string): any;
+		ReadFromRegistry(userSpecific: boolean, key: string, valueName: string): unknown;
 
 		/**
 		 * Writes a new value to the registry.
@@ -712,7 +716,7 @@ declare module MFilesUI {
 		 */
 		WriteToRegistry(userSpecific: boolean, key: string, valueName: string, value: number, valueType: "REG_DWORD"): void;
 		WriteToRegistry(userSpecific: boolean, key: string, valueName: string, value: string, valueType: "REG_SZ"): void;
-		WriteToRegistry(userSpecific: boolean, key: string, valueName: string, value: any, valueType: any): void;
+		WriteToRegistry(userSpecific: boolean, key: string, valueName: string, value: unknown, valueType: string): void;
 
 		/**
 		 * Deletes the registry key recursively.
@@ -720,15 +724,6 @@ declare module MFilesUI {
 		 * @param {string} key - The registry key to delete.
 		 */
 		DeleteRegistryKey(userSpecific: boolean, key: string): void;
-
-		/**
-		 * Reads the registry value from registry.
-		 * @param {boolean} userSpecific - True to access registry keys under HKEY_CURRENT_USER, false to access under HKEY_LOCAL_MACHINE.
-		 * @param {string} key - The registry key where to write.
-		 * @param {string} valueName - The name of the value. Use empty string to indicate the default value of a registry key.
-		 * @returns {any} - The value.
-		 */
-		MethodTemplate(userSpecific: boolean, key: string, valueName: string): any;
 
 		/**
 		 * Deletes the registry value.
@@ -3406,7 +3401,7 @@ declare module MFilesUI {
 
 		/**
 		 * Receives the dashboard custom data object that was passed for the dashboard when it was displayed. Read only.
-		 * @member {Object}
+		 * @member {unknown}
 		 */
 		readonly CustomData: unknown
 
@@ -3460,9 +3455,9 @@ declare module MFilesUI {
 		 * Shows a dashboard in a popup window.
 		 * @param {string} dashboardID - The dashboard ID.
 		 * @param {boolean} waitUntilClosed - True to wait until the popup window is closed.
-		 * @param {Object} data - Data object to pass for the dashboard code.
+		 * @param {unknown} data - Data object to pass for the dashboard code.
 		 */
-		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: Object): void;
+		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: unknown): void;
 	}
 
 	/**
@@ -3507,7 +3502,7 @@ declare module MFilesUI {
 		 * Writeonly method.
 		 * @member {EventCallback}
 		 */
-		SaveAllMethod: () => any;
+		SaveAllMethod: () => void;
 
 		/**
 		 * Shows a Browser for folder -dialog.
@@ -3649,9 +3644,9 @@ declare module MFilesUI {
 
 		/**
 		 * Sets the UI theme of the shell frame.
-		 * @param {Object} - The task pane theme object. See the theme object description.
+		 * @param {object} - The task pane theme object. See the theme object description.
 		 */
-		SetTheme(theme: Object): void;  // TODO: Define theme object.
+		SetTheme(theme: object): void;  // TODO: Define theme object.
 
 		/*
 		//! Executes the current search.
@@ -3858,7 +3853,7 @@ declare module MFilesUI {
 		 * Indicates if the window represents a location in object folder (i.e. inside of multifile object). Read only.
 		 * @member {boolean}
 		 */
-		IsObjectLocation: boolean;
+		IsObjectLocation: () => boolean;
 
 		/**
 		 * The object version for current location. Applicable only if the current location is in object folder. Read only.
@@ -3870,7 +3865,7 @@ declare module MFilesUI {
 		 * Indicates if the window represents a location in a folder. Read only.
 		 * @member {boolean}
 		 */
-		IsFolderLocation: boolean;
+		IsFolderLocation: () => boolean;
 
 		/**
 		 * The folder definition for current location. Applicable only if the current location is in non-object folder. Read only.
@@ -3920,9 +3915,9 @@ declare module MFilesUI {
 		/**
 		 * Sets the shell window main area to show a dashboard.
 		 * @param {string} dashboardID - The dashboard ID.
-		 * @param {Object} data - Data object to pass for the HTML code.
+		 * @param {unknown} data - Data object to pass for the HTML code.
 		 */
-		ShowDashboard(dashboardID: string, data: Object): void;
+		ShowDashboard(dashboardID: string, data: unknown): void;
 
 		/**
 		 * Shows a report in a popup window.
@@ -3935,9 +3930,9 @@ declare module MFilesUI {
 		 * Shows a dashboard in a popup window.
 		 * @param {string} dashboardID - The dashboard ID.
 		 * @param {boolean} waitUntilClosed - True to wait until the popup window is closed.
-		 * @param {Object} data - Data object to pass for the dashboard code.
+		 * @param {unknown} data - Data object to pass for the dashboard code.
 		 */
-		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: Object): void;
+		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: unknown): void;
 
 		/**
 		 * Shows a message box.
@@ -4054,9 +4049,9 @@ declare module MFilesUI {
 
 		/**
 		 * Sets the UI theme of the shell frame.
-		 * @param {Object} - The task pane theme object. See the theme object description.
+		 * @param {object} - The task pane theme object. See the theme object description.
 		 */
-		SetTheme(theme: Object): void;
+		SetTheme(theme: object): void;
 
 		/**
 		 * Gets the current shell frame UI state object.
@@ -4086,16 +4081,16 @@ declare module MFilesUI {
 	interface IShellFrameEventObject {
 
 		// TODO: Events
-		OnStarted?: () => any;
-		OnStop?: () => any;
+		OnStarted?: () => void;
+		OnStop?: () => void;
 		OnNewTaskPaneEvent?: (taskPane: ITaskPane) => void | ITaskPaneEventObject;
 		OnNewBottomPaneEvent?: (pane: IShellPaneContainer) => void | IShellPaneContainerEventObject;
 		OnNewRightPaneEvent?: (pane: IShellPaneContainer) => void | IShellPaneContainerEventObject;
 		OnNewSearchPaneEvent?: (searchPane: ISearchPane) => void | ISearchPaneEventObject;
 		OnNewShellListingEvent?: (listing: IShellListing) => void | IShellListingEventObject;
 		OnNewCommandsEvent?: (commands: ICommands) => void | ICommandsEventObject;
-		OnShowMainMenuEvent?: () => any;
-		OnActiveListingChangedEvent?: (oldListing: IShellListing, newListing: IShellListing) => any;
+		OnShowMainMenuEvent?: () => void;
+		OnActiveListingChangedEvent?: (oldListing: IShellListing, newListing: IShellListing) => void;
 	}
 
 	/**
@@ -4105,18 +4100,18 @@ declare module MFilesUI {
 		extends IEvents, IShellFrameEventObject {
 
 		// TODO: Events
-		Register(event: Event.Started, sink: () => any): number;
-		Register(event: Event.Stop, sink: () => any): number;
+		Register(event: Event.Started, sink: () => void): number;
+		Register(event: Event.Stop, sink: () => void): number;
 		Register(event: Event.NewTaskPane, sink: (taskPane: ITaskPane) => void | ITaskPaneEventObject): number;
 		Register(event: Event.NewBottomPane, sink: (pane: IShellPaneContainer) => void | IShellPaneContainerEventObject): number;
 		Register(event: Event.NewRightPane, sink: (pane: IShellPaneContainer) => void | IShellPaneContainerEventObject): number;
 		Register(event: Event.NewSearchPane, sink: (searchPane: ISearchPane) => void | ISearchPaneEventObject): number;
 		Register(event: Event.NewShellListing, sink: (listing: IShellListing) => void | IShellListingEventObject): number;
 		Register(event: Event.NewCommands, sink: (commands: ICommands) => void | ICommandsEventObject): number;
-		Register(event: Event.ShowMainMenu, sink: () => any): number;
-		Register(event: Event.ActiveListingChanged, sink: (oldListing: IShellListing, newListing: IShellListing) => any): number;
-		Register(event: Event.SelectionChanged, sink: (items: MFilesUI.IShellItems, listing: MFilesUI.IShellListing) => any): number;
-		Register(event: Event.SelectedItemsChanged, sink: (items: MFilesUI.IShellItems, listing: MFilesUI.IShellListing) => any): number;
+		Register(event: Event.ShowMainMenu, sink: () => void): number;
+		Register(event: Event.ActiveListingChanged, sink: (oldListing: IShellListing | null, newListing: IShellListing) => void): number;
+		Register(event: Event.SelectionChanged, sink: (items: MFilesUI.IShellItems, listing: MFilesUI.IShellListing) => void): number;
+		Register(event: Event.SelectedItemsChanged, sink: (items: MFilesUI.IShellItems, listing: MFilesUI.IShellListing) => void): number;
 	}
 
 	/**
@@ -4304,9 +4299,9 @@ declare module MFilesUI {
 
 		/**
 		 * Sets the UI theme of the listing. Available only if the application has a permission to change the theme.
-		 * @param {Object} theme - The listing theme object. See the theme object description.
+		 * @param {object} theme - The listing theme object. See the theme object description.
 		 */
-		SetTheme(theme: Object): void  // TODO: Define theme object.
+		SetTheme(theme: object): void  // TODO: Define theme object.
 
 		/**
 		 * Gets the current location as a path. The path is relative to the vault root. Read-only.
@@ -4496,54 +4491,6 @@ declare module MFilesUI {
 		 */
 		SetDefaultVisibility(visible: boolean, resetToDefault: boolean): void;
 
-		///**
-		// * Resets the properties pane content, and restores the standard properties pane content rules.
-		// * Deprecated. Use tabs instead.
-		// */
-		//ShowDefaultContent()
-
-		///**
-		// * Prevents the content displayed on properties pane.
-		// * Deprecated. Use tabs instead.
-		// */
-		//ShowEmptyContent()
-
-		///**
-		// * Sets the properties pane content to show properties of an object version.
-		// * Deprecated. Use tabs instead.
-		// * @param {MFilesAPI.PropertyValuesWithIconClues} propertyValuesWithIcons - Specifies the object version and properties to show.
-		// */
-		//ShowObjectVersionProperties( propertyValuesWithIcons: MFilesAPI.PropertyValuesWithIconClues );
-
-		///**
-		// * Sets the pane content to show a file preview.
-		// * Deprecated. Use tabs instead.
-		// * @param {string} file - Absolute path to the file to preview.
-		// */
-		//ShowFilePreview( file: string );
-
-		///**
-		// * Sets the pane content to show a report.
-		// * Deprecated. Use tabs instead.
-		// * @param {string} reportURL - The report URL.
-		// */
-		//ShowSSRSReport( reportURL: string );
-
-		///**
-		// * Sets the pane content to show a dashboard.
-		// * Deprecated. Use tabs instead.
-		// * @param {string} dashboardID - The dashboard ID.
-		// * @param {Object} data - Data object to pass for the HTML code.
-		// */
-		//ShowDashboard( dashboardID: string, data: Object );
-
-		///**
-		// * Shows content that is previously allocated. Fails if the content is already being displayed elsewhere.
-		//* Deprecated. Use tabs instead.
-		// * @param {string} sessionHandle - The session handle.
-		// */
-		//ShowPersistentContent( sessionHandle: number );
-
 		/**
 		 * Returns a reference to the IShellFrame which owns this IShellPaneContainer.
 		 */
@@ -4553,7 +4500,7 @@ declare module MFilesUI {
 		 * Not implemented.
 		 * Read-only.
 		 */
-		Content: any;
+		Content: object;
 
 		/**
 		 * Sets background images. Available only if the application has a permission to change the theme.
@@ -4703,9 +4650,9 @@ declare module MFilesUI {
 		/**
 		 * Shows the specified dashboard in the tab.
 		 * @param {string} dashboardID - The dashboard ID.
-		 * @param {Object} data - Data object to pass for the HTML code.
+		 * @param {unknown} data - Data object to pass for the HTML code.
 		 */
-		ShowDashboard(dashboardID: string, data: Object): void;
+		ShowDashboard(dashboardID: string, data: unknown): void;
 
 		/**
 		 * Shows content that is previously allocated in the tab. Fails if the content is already being displayed elsewhere or if the handle is invalid.
@@ -4902,9 +4849,9 @@ declare module MFilesUI {
 		 * Shows a dashboard in a popup window.
 		 * @param {string} dashboardID - The dashboard ID.
 		 * @param {boolean} waitUntilClosed - True to wait until the popup window is closed.
-		 * @param {Object} data - Data object to pass for the dashboard code.
+		 * @param {unknown} data - Data object to pass for the dashboard code.
 		 */
-		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: Object): void;
+		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: unknown): void;
 
 		/**
 		 * Shows a message box.
@@ -4916,10 +4863,10 @@ declare module MFilesUI {
 		/**
 		 * Creates a browser session that is persisted in ShellUI context. The session can be displayed separately e.g. in a shell pane.
 		 * @param {string} url - The url to where the browser is pointed.
-		 * @param {Object} parameters - Data object, which contains parameters for browser content.
+		 * @param {object} parameters - Data object, which contains parameters for browser content.
 		 * @returns {number} - A handle to the session.
 		 */
-		CreatePersistentBrowserContent(url: string, parameters: Object): number;
+		CreatePersistentBrowserContent(url: string, parameters: object): number; // TODO: Create parameters object.
 
 		/**
 		 * Destroys separately created persistent content (e.g. browser content).
@@ -4930,11 +4877,11 @@ declare module MFilesUI {
 		/**
 		 * Sends a synchronous notification for all associated VaultEntry listeners. Note: notifies the vault entry of this Windows Session only.
 		 * @param {string} ID - The notification identification for the listener.
-		 * @param {any} data1 - The notification payload data. Must not contain object references.
-		 * @param {any} data2 - The notification payload data. Must not contain object references.
-		 * @returns {any} - Receives the notification return value. Must not contain object references. In a case of multiple notification receivers, the last one has a preference.
+		 * @param {unknown} data1 - The notification payload data. Must not contain object references.
+		 * @param {unknown} data2 - The notification payload data. Must not contain object references.
+		 * @returns {unknown} - Receives the notification return value. Must not contain object references. In a case of multiple notification receivers, the last one has a preference.
 		 */
-		NotifyVaultEntry(ID: string, data1: any, data2: any): any;
+		NotifyVaultEntry(ID: string, data1: unknown, data2: unknown): unknown;
 
 		/**
 		 * Gets the URL of the icon for the specified object type.
@@ -4957,28 +4904,19 @@ declare module MFilesUI {
 		ServerVault: MFilesAPI.Vault;
 
 		/**
-		 * Performs an internal test.
-		 * (HIDDEN)
-		 * @param {any} testParam1 - The test parameter 1.
-		 * @param {any} testParam2 - The test parameter 2.
-		 * @returns {any} - The test result.
-		 */
-		// Test( testParam1: any, testParam2: any ): any;
-
-		/**
 		 * Sends a synchronous broadcast message to all applications.
 		 * @param {string} msgID - The broadcast message id for the listeners.
-		 * @param {any} data - The broadcast payload data.
+		 * @param {unknown} data - The broadcast payload data.
 		 */
-		BroadcastMessage(msgID: string, data: any): void;
+		BroadcastMessage(msgID: string, data: unknown): void;
 
 		/**
 		 * Sends a synchronous notification to a specific application.
 		 * @param {string} appGuid - The application to notify.
 		 * @param {string} msgID - The notification message id for the listeners.
-		 * @param {any} data - The notification payload data.
+		 * @param {unknown} data - The notification payload data.
 		 */
-		NotifyApplication(appGuid: string, msgID: string, data: any): void;
+		NotifyApplication(appGuid: string, msgID: string, data: unknown): void;
 
 	}
 
@@ -5044,7 +4982,7 @@ declare module MFilesUI {
 		setPropertiesParams: MFilesAPI.SetPropertiesParams,
 		singlePropertyUpdate: boolean,
 		singlePropertyRemove: boolean
-	) => any | boolean | void;
+	) => object | boolean | null;
 
 	/**
 	 * Cross Application event handler.
@@ -5052,7 +4990,7 @@ declare module MFilesUI {
 	type CrossApplicationEventHandler = (
 		appGuid: string,
 		msgID: string,
-		data: any
+		data: unknown
 	) => void;
 
 	/**
@@ -5141,9 +5079,9 @@ declare module MFilesUI {
 
 		/**
 		 * Sets the UI theme of the task pane. Available only if the application has a permission to change the theme.
-		 * @param {Object} theme - The task pane theme object. See the theme object description.
+		 * @param {object} theme - The task pane theme object. See the theme object description.
 		 */
-		SetTheme(theme: Object): void  // TODO: Define theme object.
+		SetTheme(theme: object): void  // TODO: Define theme object.
 
 	}
 
@@ -5260,8 +5198,8 @@ declare module MFilesUI {
 	interface IVaultEntryEventObject {
 
 		// TODO: Events
-		OnStarted?: () => any;
-		OnStop?: () => any;
+		OnStarted?: () => void;
+		OnStop?: () => void;
 	}
 
 	/**
@@ -5271,8 +5209,16 @@ declare module MFilesUI {
 		extends IEvents, IVaultEntryEventObject {
 
 		// TODO: Events
-		Register(event: Event.Started, sink: () => any): number;
-		Register(event: Event.Stop, sink: () => any): number;
+		Register(event: Event.Started, sink: () => void): number;
+		Register(event: Event.Stop, sink: () => void): number;
+		Register(event: Event.CreateObject, sink: (
+			objectType: number,
+			propertyValues: MFilesAPI.IPropertyValues,
+			sourceObjectFiles: MFilesAPI.ISourceObjectFiles,
+			accessControlList: MFilesAPI.IAccessControlList,
+			checkInRequested: boolean,
+			singleFileRequested: boolean
+		) => object | boolean | null): number; // TODO: Create callback object type.
 	}
 
 	/**
@@ -5282,9 +5228,9 @@ declare module MFilesUI {
 
 		/**
 		 * Accesses the event source object for this object. Read only.
-		 * @member {IEvents}
+		 * @member {IVaultUIEvents}
 		 */
-		readonly Events: IEvents;
+		readonly Events: IVaultUIEvents;
 
 		/**
 		 * Accesses the vault object.. Read-only.
@@ -5302,9 +5248,9 @@ declare module MFilesUI {
 		 * Shows a dashboard in a popup window.
 		 * @param {string} dashboardID - The dashboard ID.
 		 * @param {boolean} waitUntilClosed - True to wait until the popup window is closed.
-		 * @param {Object} data - Data object to pass for the dashboard code.
+		 * @param {unknown} data - Data object to pass for the dashboard code.
 		 */
-		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: Object): void;
+		ShowPopupDashboard(dashboardID: string, waitUntilClosed: boolean, data: unknown): void;
 
 		/**
 		 * Shows a message box.

@@ -1,5 +1,7 @@
-
-declare module MFilesAPI {
+/**
+ * Declare a globally available namespace.
+ */
+declare namespace MFilesAPI {
 
 	export type AsyncSuccessHandler = () => void;
 

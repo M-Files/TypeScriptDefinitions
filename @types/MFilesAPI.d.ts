@@ -1,4 +1,10 @@
-declare module MFilesAPI {
+/* eslint-disable @typescript-eslint/no-empty-interface */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/**
+ * Declare a globally available namespace.
+ */
+declare namespace MFilesAPI {
 
 	export interface MFScheduledJobType { }
 	namespace MFScheduledJobType {
@@ -1596,7 +1602,7 @@ declare module MFilesAPI {
 		readonly Names: Strings;
 		Clone(): MFilesAPI.NamedValues;
 		Contains(Name: string): boolean;
-		[index: string]: any;
+		[index: string]: unknown;
 	}
 
 	export interface Strings extends IStrings {
@@ -2556,7 +2562,7 @@ declare module MFilesAPI {
 	}
 
 	export interface ObjTypes extends IObjectTypes {
-		[index: number]: any;
+		[index: number]: ObjType;
 	}
 
 	export interface IObjectTypes {
@@ -2587,7 +2593,7 @@ declare module MFilesAPI {
 	}
 
 	export interface ObjTypesAdmin extends IObjectTypesAdmin {
-		[index: number]: any;
+		[index: number]: ObjTypeAdmin;
 	}
 
 	export interface IObjectTypesAdmin {
@@ -2685,7 +2691,7 @@ declare module MFilesAPI {
 	}
 
 	export interface ObjTypeColumnMappings extends IObjectTypeColumnMappings {
-		[index: number]: any;
+		[index: number]: ObjTypeColumnMapping;
 	}
 
 	export interface IObjectTypeColumnMappings {
@@ -3074,7 +3080,7 @@ declare module MFilesAPI {
 	export interface ITypedValue {
 		readonly DataType: MFilesAPI.MFDataType;
 		readonly DisplayValue: string;
-		Value: number | string | boolean | Lookup | Lookups | Timestamp;
+		Value: number | string | boolean | Lookup | Lookups | Timestamp | VarDate;
 		SetValue(DataType: MFilesAPI.MFDataType, Value: number | string | boolean | Lookup | Lookups | Timestamp): void;
 		IsNULL(): boolean;
 		Clone(): MFilesAPI.TypedValue;

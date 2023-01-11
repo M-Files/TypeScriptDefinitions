@@ -1,2 +1,1 @@
-/// <reference path="MFilesUI.d.ts" />
-declare var MFiles: MFilesUI.ICommonFunctions;
+declare const MFiles: MFilesUI.ICommonFunctions;
