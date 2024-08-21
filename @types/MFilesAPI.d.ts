@@ -1741,7 +1741,7 @@ declare namespace MFilesAPI {
 		GetLatestObjVer(ObjID: ObjID, AllowCheckedOut: boolean, UpdateFromServer?: boolean): MFilesAPI.ObjVer;
 		CreateNewObjectExQuick(ObjectType: number, Properties: PropertyValues, SourceFiles: SourceObjectFiles | null, SFD: boolean | undefined, CheckIn: boolean | undefined, AccessControlList: AccessControlList | null): number;
 		GetMFilesURLForObject(ObjID: ObjID, TargetVersion: number, SpecificVersion: boolean, URLType?: MFilesAPI.MFilesURLType): string;
-		ShowPrefilledNewObjectWindow(ParentWindow: number, Mode: MFilesAPI.MFObjectWindowMode, ObjectCreationInfo: ObjectCreationInfo, PrefilledPropertyValues?: PropertyValues, AccessControlList?: AccessControlList): MFilesAPI.ObjectWindowResult;
+		ShowPrefilledNewObjectWindow(ParentWindow: number, Mode: MFilesAPI.MFObjectWindowMode, ObjectCreationInfo: ObjectCreationInfo, PrefilledPropertyValues?: PropertyValues, AccessControlList: AccessControlList | null): MFilesAPI.ObjectWindowResult;
 		CreateNewEmptySingleFileDocument(PropertyValues: PropertyValues, Title: string, Extension: string, AccessControlList?: AccessControlList): MFilesAPI.ObjectVersionAndProperties;
 		SetOfflineAvailability(ObjID: ObjID, AvailableInOfflineMode: boolean): void;
 		GetObjectLocationsInView(View: number, LatestSpecificBehavior: MFilesAPI.MFLatestSpecificBehavior, ObjectVersion: ObjVer): MFilesAPI.Strings;

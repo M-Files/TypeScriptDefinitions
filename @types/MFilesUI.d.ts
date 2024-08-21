@@ -4834,6 +4834,12 @@ declare namespace MFilesUI {
 		Events: IShellUIEvents;
 
 		/**
+		 * Resolves whether fast browsing between folders is active.
+		 * In other words, whether the fast-browsing mode is enabled and supported by all the ShellUI applications in the vault.
+		 */
+		FastBrowsingActive: boolean;
+
+		/**
 		 * Accesses the vault object.
 		 * @member {MFilesAPI.Vault}
 		 */
@@ -5219,6 +5225,7 @@ declare namespace MFilesUI {
 			checkInRequested: boolean,
 			singleFileRequested: boolean
 		) => object | boolean | null): number; // TODO: Create callback object type.
+		Register(event: Event.ObjectCreated, sink: (objectVersion: MFilesAPI.IObjectVersion) => void);
 	}
 
 	/**
